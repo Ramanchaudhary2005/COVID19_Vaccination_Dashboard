@@ -5,12 +5,12 @@ import matplotlib.pyplot as plt
 import os
 from pathlib import Path
 
-# Config
+
 st.set_page_config(page_title="COVID-19 Vaccination Dashboard", layout="wide")
 st.title("💉 COVID-19 Vaccination Dashboard")
 st.markdown("Analyzing vaccination outcomes across age groups over time.")
 
-# Load Data
+# L_D
 @st.cache_data
 def load_data():
     data_path = Path(__file__).resolve().parents[1] / "data" / "processed" / "covid_data_cleaned.csv"
@@ -20,12 +20,12 @@ def load_data():
 
 df = load_data()
 
-# Sidebar Filters
+#side bar 
 st.sidebar.header("📊 Filters")
 age_group = st.sidebar.multiselect("Select Age Group(s):", df["age_group"].unique(), default=df["age_group"].unique())
 outcome_type = st.sidebar.selectbox("Select Outcome Type:", ["outcome_unvaccinated", "outcome_vaccinated", "outcome_boosted"])
 
-# Filter data
+# Fil data
 filtered_df = df[df["age_group"].isin(age_group)]
 
 # Line Chart
@@ -36,7 +36,7 @@ ax1.set_title(f"{outcome_type.replace('_', ' ').title()} Over Time")
 ax1.set_ylabel("Count")
 st.pyplot(fig1)
 
-# Show pre-generated plots
+
 st.subheader("🖼️ Exploratory Data Analysis (EDA) Plots")
 eda_folder = Path(__file__).resolve().parents[1] / "assets" / "images" / "eda"
 

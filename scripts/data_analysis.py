@@ -4,16 +4,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# Setup styles
+
 sns.set(style="whitegrid")
 plt.style.use("seaborn-v0_8")
 
-# Load cleaned data
+
 data_path = "data/processed/covid_data_cleaned.csv"
 df = pd.read_csv(data_path)
 df['date'] = pd.to_datetime(df['date'])
 
-# Create folder for output images
+
 os.makedirs("assets/images/eda", exist_ok=True)
 
 # 1. Basic info

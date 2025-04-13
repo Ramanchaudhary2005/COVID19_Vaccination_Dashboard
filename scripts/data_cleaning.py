@@ -19,31 +19,31 @@ def visualize_missing_values(df, save_path="assets/images/missing_values.png"):
 
 
 def clean_covid_data(input_path, output_path):
-    # Load the dataset
+    
     df = pd.read_csv(input_path)
 
-    # Rename 'Week End' to 'date'
+    
     if 'Week End' in df.columns:
         df.rename(columns={'Week End': 'date'}, inplace=True)
 
     print("[INFO] Original shape:", df.shape)
 
-    # Visualize missing values before cleaning
+    
     visualize_missing_values(df)
 
-    # Convert 'date' column to datetime
+    # Convert 'date' col
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
 
-    # Clean column names
+    # Clean col
     df.rename(columns=lambda x: x.strip().lower().replace(" ", "_").replace("-", "_"), inplace=True)
 
-    # Drop rows with missing dates
+    # Drop rows 
     df.dropna(subset=['date'], inplace=True)
 
-    # Fill numeric NaNs with 0
+    # Fill num
     numeric_cols = df.select_dtypes(include=np.number).columns
 
-    # Save histograms before fill
+    # Save hist before fill
     for col in numeric_cols:
         if df[col].isnull().sum() > 0:
             plt.figure()
@@ -56,7 +56,7 @@ def clean_covid_data(input_path, output_path):
 
     df[numeric_cols] = df[numeric_cols].fillna(0)
 
-    # Save cleaned version
+    # Save cln ver
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     df.to_csv(output_path, index=False)
 
