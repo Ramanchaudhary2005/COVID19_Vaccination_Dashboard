@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-df = pd.read_csv("data/processed/covid_data_cleaned.csv")  # Adjust path if needed
+df = pd.read_csv("data/processed/covid_data_cleaned.csv")  
 
 
 print("Dataset Info:")
